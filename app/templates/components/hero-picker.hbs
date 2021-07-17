@@ -1,0 +1,11 @@
+<fieldset class="form-group" id="hero-form">
+  <label for="hero-select">Hero:</label>
+  <select class="custom-select" id="hero-select">
+    <option value="draft">Draft</option>
+    {{#each this.heroes as |hero|}}
+      <option value={{hero.code}}>{{hero.name}}</option>
+    {{/each}}
+  </select>
+</fieldset>
+
+<button type="button" class="btn btn-primary" {{on 'click' this.submit}}>Start</button>
