@@ -1,0 +1,21 @@
+<p>Card Count: {{@cards.length}}</p>
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Type</td>
+        <td>Cost</td>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each @cards as |card|}}
+      <tr>
+        <td>{{card.name}}</td>
+        <td>{{card.type_code}}</td>
+        <td>{{card.cost}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

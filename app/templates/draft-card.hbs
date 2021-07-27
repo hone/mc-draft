@@ -1,0 +1,8 @@
+<div class="text-center">
+  <h1 class="display-4">Drafting for {{this.model.hero.name}} ({{this.faction}})</h1>
+</div>
+<div class="container">
+  <CardPicker @cards={{this.cardSelection}} @action={{this.select}} />
+</div>
+
+<Deck @cards={{this.selectedCardObjects}} />

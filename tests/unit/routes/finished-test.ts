@@ -1,12 +1,11 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import IndexRoute from 'mc-draft/routes/index';
 
-module('Unit | Route | index', function (hooks) {
+module('Unit | Route | finished', function (hooks) {
   setupTest(hooks);
 
   test('it exists', function (assert) {
-    const route = this.owner.lookup('route:index') as IndexRoute;
+    const route = this.owner.lookup('route:finished');
     assert.ok(route);
   });
 });

@@ -1,6 +1,6 @@
 <fieldset class="form-group" id="hero-form">
   <label for="hero-select">Hero:</label>
-  <select class="custom-select" id="hero-select">
+  <select class="custom-select" id="hero-select" {{on "change" this.selectHero}}>
     <option value="draft">Draft</option>
     {{#each this.heroes as |hero|}}
       <option value={{hero.code}}>{{hero.name}}</option>

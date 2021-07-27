@@ -1,22 +1,36 @@
 import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import { Card } from 'mc-draft/routes/index';
+import { inject as service } from '@ember/service';
+import RouterService from '@ember/routing/router-service';
+import { Card } from 'mc-draft/services/cards';
+import { assert } from '@ember/debug';
 
 interface HeroPickerArgs {
   cards: Array<Card>;
 }
 
-const SPIDER_WOMAN_CODE = '04031a';
-const GAMORA_CODE = '18001a';
-const EXCLUDE_HEROES = [SPIDER_WOMAN_CODE, GAMORA_CODE];
-
 export default class HeroPicker extends Component<HeroPickerArgs> {
+  @service declare router: RouterService;
+  @tracked selectedHero = 'draft';
+
   get heroes(): Array<Card> {
-    return this.args.cards.filter(
-      (card) => card.type_code === 'hero' && !EXCLUDE_HEROES.includes(card.code)
-    );
+    return this.args.cards;
   }
 
   @action
-  submit() {}
+  submit(): void {
+    if (this.selectedHero != 'draft') {
+      void this.router.transitionTo('draft-aspect', this.selectedHero);
+    }
+  }
+
+  @action
+  selectHero(event: InputEvent): void {
+    assert(
+      'expecting HTMLSelectElement',
+      event.target instanceof HTMLSelectElement
+    );
+    this.selectedHero = event.target.value;
+  }
 }

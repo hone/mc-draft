@@ -1,0 +1,8 @@
+<div class="card-deck mb-3">
+  {{#each @cards as |card|}}
+    <div class="card mb-4 text-center">
+      <img src="https://marvelcdb.com/{{card.imagesrc}}" alt={{card.name}} />
+      <p><a class="btn btn-secondary" href="" role="button" {{on "click" (fn @action card)}}>Select</a></p>
+    </div>
+  {{/each}}
+</div>
