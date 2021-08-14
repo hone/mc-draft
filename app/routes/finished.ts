@@ -13,6 +13,8 @@ export interface Model {
 export default class Finished extends Route {
   @service declare cards: CardsService;
 
+  selectedCards: string[] = [];
+
   async model(params: Params): Promise<Model> {
     await this.cards.load();
 

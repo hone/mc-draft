@@ -1,5 +1,8 @@
 <div class="text-center">
-  <h1 class="display-4">{{this.model.hero.name}} ({{this.faction}})</h1>
+  <h1>Marvel Champions Draft</h1>
+  <h2 class="display-4">{{this.model.hero.name}} ({{this.faction}})</h2>
 </div>
 
-<Deck @cards={{this.model.cards}} />
+<div class="container">
+  <Deck @cards={{this.selectedCardObjects}} />
+</div>

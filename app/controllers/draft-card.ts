@@ -7,6 +7,8 @@ import { tracked } from '@glimmer/tracking';
 import { Model } from 'mc-draft/routes/draft-card';
 import shuffle from 'lodash.shuffle';
 
+const DECK_LIMIT = 25;
+
 export default class DraftCard extends Controller {
   @service declare cards: CardsService;
   @service declare router: RouterService;
@@ -24,7 +26,7 @@ export default class DraftCard extends Controller {
   ];
 
   faction = 'aggression';
-  @tracked selectedCards = [];
+  @tracked selectedCards: Array<string> = [];
 
   get selectedCardObjects(): Array<Card> {
     return this.selectedCards.map((code) => this.cards.card(code));
@@ -42,7 +44,7 @@ export default class DraftCard extends Controller {
         }
       });
     const index = cards.findIndex((card) =>
-      (this.selectedCards as string[]).includes(card.code)
+      this.selectedCards.includes(card.code)
     );
     cards.splice(index, 1);
 
@@ -64,7 +66,7 @@ export default class DraftCard extends Controller {
     const selectedCards = [card.code].concat(this.selectedCards);
     let routeName;
 
-    if (selectedCards.length < 40) {
+    if (selectedCards.length < DECK_LIMIT) {
       routeName = 'draft-card';
     } else {
       routeName = 'finished';

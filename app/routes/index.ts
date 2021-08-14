@@ -12,8 +12,6 @@ export default class Index extends Route {
   async model(): Promise<Array<Card>> {
     await this.cards.load();
 
-    return this.cards.collection.filter(
-      (card) => card.type_code === 'hero' && !EXCLUDE_HEROES.includes(card.code)
-    );
+    return this.cards.heroes(EXCLUDE_HEROES);
   }
 }

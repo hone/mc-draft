@@ -53,14 +53,10 @@ export default class CardsService extends Service {
     return this.collection.filter((card) => card.code === code)[0];
   }
 
-  cardPool(name: Faction): Array<Card> {
-    return this.aspect(name).flatMap((card) => {
-      if (card.is_unique) {
-        return card;
-      } else {
-        return [card, card, card];
-      }
-    });
+  heroes(excludes: string[] = []): Array<Card> {
+    return this.collection.filter(
+      (card) => card.type_code === 'hero' && !excludes.includes(card.code)
+    );
   }
 }
 
