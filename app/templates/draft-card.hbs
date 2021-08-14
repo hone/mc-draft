@@ -3,6 +3,7 @@
   <h2 class="display-4">Drafting for {{this.model.hero.name}} ({{this.faction}})</h2>
 </div>
 <div class="container">
+  <p>Cards Left: {{this.cardsLeft}}</p>
   <CardPicker @cards={{this.cardSelection}} @action={{this.select}} />
 </div>
 

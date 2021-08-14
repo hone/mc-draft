@@ -28,6 +28,10 @@ export default class DraftCard extends Controller {
   faction = 'aggression';
   @tracked selectedCards: Array<string> = [];
 
+  get cardsLeft(): number {
+    return DECK_LIMIT - this.selectedCards.length;
+  }
+
   get selectedCardObjects(): Array<Card> {
     return this.selectedCards.map((code) => this.cards.card(code));
   }
@@ -37,11 +41,7 @@ export default class DraftCard extends Controller {
       .aspect(this.faction as Faction)
       .concat(this.cards.aspect(Faction.Basic))
       .flatMap((card: Card) => {
-        if (card.is_unique) {
-          return card;
-        } else {
-          return [card, card, card];
-        }
+        return Array(card.deck_limit).fill(card) as Array<Card>;
       });
     const index = cards.findIndex((card) =>
       this.selectedCards.includes(card.code)

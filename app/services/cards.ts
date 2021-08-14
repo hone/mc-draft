@@ -7,7 +7,7 @@ export interface Card {
   type_code: string;
   code: string;
   faction_code: string;
-  is_unique: boolean;
+  deck_limit: number;
   card_set_type_name_code: string;
   cost: number;
 }
