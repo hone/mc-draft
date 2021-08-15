@@ -58,7 +58,11 @@ export default class CardsService extends Service {
 
   heroes(excludes: string[] = EXCLUDE_HEROES): Array<Card> {
     return this.collection.filter(
-      (card) => card.type_code === 'hero' && !excludes.includes(card.code)
+      (card) =>
+        card.type_code === 'hero' &&
+        // Ant-Man & Wasp have a 2nd card in marvelcdb
+        card.code.slice(-1) !== 'c' &&
+        !excludes.includes(card.code)
     );
   }
 }
