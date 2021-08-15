@@ -2,10 +2,10 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import CardsService, { Card, Faction } from 'mc-draft/services/cards';
+import randomCards from 'mc-draft/lib/random-cards';
 import RouterService from '@ember/routing/router-service';
 import { tracked } from '@glimmer/tracking';
 import { Model } from 'mc-draft/routes/draft-card';
-import shuffle from 'lodash.shuffle';
 
 const DECK_LIMIT = 25;
 
@@ -43,22 +43,17 @@ export default class DraftCard extends Controller {
       .flatMap((card: Card) => {
         return Array(card.deck_limit).fill(card) as Array<Card>;
       });
-    const index = cards.findIndex((card) =>
-      this.selectedCards.includes(card.code)
-    );
-    cards.splice(index, 1);
+    this.selectedCards.forEach((selectedCard) => {
+      const index = cards.findIndex((card) => selectedCard === card.code);
+      cards.splice(index, 1);
+    });
 
-    return shuffle(cards);
+    return cards;
   }
 
   get cardSelection(): Array<Card> {
     const pool = this.cardPool();
-
-    return [...Array(4).keys()]
-      .map(() => {
-        return pool.pop();
-      })
-      .filter((maybeCard) => maybeCard !== undefined) as Card[];
+    return randomCards(pool);
   }
 
   @action

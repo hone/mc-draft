@@ -22,6 +22,8 @@ export default class HeroPicker extends Component<HeroPickerArgs> {
   submit(): void {
     if (this.selectedHero != 'draft') {
       void this.router.transitionTo('draft-aspect', this.selectedHero);
+    } else {
+      void this.router.transitionTo('draft-hero');
     }
   }
 

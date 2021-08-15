@@ -22,6 +22,9 @@ export enum Faction {
 }
 
 const CARD_API = 'https://marvelcdb.com/api/public/cards/';
+const SPIDER_WOMAN_CODE = '04031a';
+const GAMORA_CODE = '18001a';
+const EXCLUDE_HEROES = [SPIDER_WOMAN_CODE, GAMORA_CODE];
 
 export default class CardsService extends Service {
   collection: Array<Card>;
@@ -53,7 +56,7 @@ export default class CardsService extends Service {
     return this.collection.filter((card) => card.code === code)[0];
   }
 
-  heroes(excludes: string[] = []): Array<Card> {
+  heroes(excludes: string[] = EXCLUDE_HEROES): Array<Card> {
     return this.collection.filter(
       (card) => card.type_code === 'hero' && !excludes.includes(card.code)
     );
