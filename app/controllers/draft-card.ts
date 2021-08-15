@@ -59,20 +59,17 @@ export default class DraftCard extends Controller {
   @action
   select(card: Card): void {
     const selectedCards = [card.code].concat(this.selectedCards);
-    let routeName;
+    // need to do this to get tracked to work
+    this.selectedCards = selectedCards;
 
-    if (selectedCards.length < DECK_LIMIT) {
-      routeName = 'draft-card';
-    } else {
-      routeName = 'finished';
+    if (this.selectedCards.length >= DECK_LIMIT) {
+      void this.router.transitionTo('finished', this.model.hero.code, {
+        queryParams: {
+          faction: this.faction,
+          selectedCards: this.selectedCards,
+        },
+      });
     }
-
-    void this.router.transitionTo(routeName, this.model.hero.code, {
-      queryParams: {
-        faction: this.faction,
-        selectedCards,
-      },
-    });
   }
 }
 
