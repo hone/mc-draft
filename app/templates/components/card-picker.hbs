@@ -2,7 +2,7 @@
   {{#each @cards as |card|}}
     <div class="card mb-4 text-center">
       <img src="https://marvelcdb.com/{{card.imagesrc}}" alt={{card.name}} />
-      <p><a class="btn btn-secondary" href="" role="button" {{on "click" (fn @action card)}}>Select</a></p>
+      <p><button type="button" class="btn btn-secondary" {{on "click" (fn @action card)}}>Select</button></p>
     </div>
   {{/each}}
 </div>
