@@ -3,16 +3,18 @@
     <thead>
       <tr>
         <td>Name</td>
+        <td>Quantity</td>
         <td>Type</td>
         <td>Cost</td>
       </tr>
     </thead>
     <tbody>
-      {{#each @cards as |card|}}
+      {{#each this.cardQuantities as |cardQuantity|}}
       <tr>
-        <td>{{card.name}}</td>
-        <td>{{card.type_code}}</td>
-        <td>{{card.cost}}</td>
+        <td>{{cardQuantity.card.name}}</td>
+        <td>{{cardQuantity.quantity}}</td>
+        <td>{{cardQuantity.card.type_code}}</td>
+        <td>{{cardQuantity.card.cost}}</td>
       </tr>
       {{/each}}
     </tbody>

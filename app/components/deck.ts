@@ -1,5 +1,33 @@
 import Component from '@glimmer/component';
+import { Card } from 'mc-draft/services/cards';
 
-interface DeckArgs {}
+export interface CardQuantity {
+  card: Card;
+  quantity: number;
+}
 
-export default class Deck extends Component<DeckArgs> {}
+interface DeckArgs {
+  cards: Array<Card>;
+}
+
+export default class Deck extends Component<DeckArgs> {
+  get cardQuantities(): Array<CardQuantity> {
+    const cardMap: Map<Card, number> = new Map();
+
+    this.args.cards.forEach((card) => {
+      const entry = cardMap.get(card);
+      if (entry === undefined) {
+        cardMap.set(card, 1);
+      } else {
+        cardMap.set(card, entry + 1);
+      }
+    });
+
+    return Array.from(cardMap.entries(), ([card, quantity]) => {
+      return {
+        card,
+        quantity,
+      };
+    });
+  }
+}
